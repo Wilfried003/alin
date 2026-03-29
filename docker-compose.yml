@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  alin-test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: alin-playwright-tests
+    
+    # Volumes pour persister les résultats des tests
+    volumes:
+      - ./test-results:/app/test-results
+      - ./playwright-report:/app/playwright-report
+      - ./videos:/app/videos
+    
+    # Variables d'environnement
+    environment:
+      CI: "true"
+      PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: "false"
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Logs
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
+    
+    # Ressources limitées
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 2G
+        reservations:
+          cpus: '0.5'
+          memory: 1G

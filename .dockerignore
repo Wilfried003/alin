@@ -1,0 +1,15 @@
+node_modules
+npm-debug.log
+test-results
+playwright-report
+.env
+.git
+.gitignore
+.DS_Store
+*.log
+.vscode
+.idea
+.next
+dist
+coverage
+videos
